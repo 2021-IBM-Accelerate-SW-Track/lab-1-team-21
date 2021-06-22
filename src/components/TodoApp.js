@@ -14,6 +14,8 @@ import Container from '@material-ui/core/Container';
  
 
 function TodoApp() {
+
+
   const [task, setTask] = useState("");
   const [tasklist, setTaskList] = useState([]);
 
@@ -24,15 +26,22 @@ function TodoApp() {
   const AddTask = () => {
     if (task !== "") {
       const taskDetails = {
-        id: 0,
+        id: Math.floor(Math.random() * 10), //should be ramdon or else it will delete all tasks
         value: task,
         isCompleted: false,
+        date: datetime()
       };
       
       setTaskList([...tasklist, taskDetails]);
     }
   };
 
+  const datetime = ()=>{
+    var showdate = new Date();
+    var displaydate= showdate.getDate() + '/'+ showdate.getMonth()+'/' + showdate.getFullYear();
+    <input type="text" value={displaydate} readOnly="true" />
+
+  }
 
   const deletetask = (e, id) => {
     e.preventDefault();
@@ -78,9 +87,9 @@ function TodoApp() {
    
     <div className="todo">   
     
-    <TextField id="filled-basic" size="small"  label="Write Tasks" variant="filled"  onChange={(e) => handleChange(e)} />
+    <TextField id="filled-basic" size="small"  label="Write Tasks" variant="filled"  onChange={(e) => handleChange(e) } />
       
-      <Button variant="contained"  size = "large"color="primary" onClick={AddTask}>
+      <Button variant="contained"  size = "large"color="primary" onClick={AddTask}  >
         Add Task!
       </Button>
      
@@ -89,11 +98,10 @@ function TodoApp() {
       {tasklist !== [] ? (
         
         <ul>
-          {tasklist.map((t) => (
-            <li className={t.isCompleted ? "crossText" : "listitem"}>
-              
-              {t.value}
-              
+          
+          {tasklist.map((t) => ( //here it displays the lsit
+            <li className="listitem"> {t.value}  
+            
               <Checkbox
               color="primary"
               classes={{root: 'custom-checkbox-root'}}
