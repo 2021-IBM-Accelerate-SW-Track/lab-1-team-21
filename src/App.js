@@ -1,10 +1,17 @@
-import Header from "./component/header"
 import './App.css';
+import TodoApp from "./components/TodoApp";
 
 function App() {
   return (
     <div className="App">
-    <Header/>
+      <br />
+      <br />
+      <br />
+      <br />
+      <h1> Todo List </h1> <br />
+      <br />
+      
+      <TodoApp />
     </div>
   );
 }
